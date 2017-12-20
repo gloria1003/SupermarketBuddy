@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/image_supermarket"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:contentDescription="Supermarket"
+        app:srcCompat="@mipmap/bg_supermarket" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/viewCouponItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/home_margin_medium"
+            android:layout_marginLeft="@dimen/home_margin_medium"
+            android:layout_marginRight="@dimen/home_margin_medium"
+            app:cardBackgroundColor="@color/home_initial_background"
+            app:cardCornerRadius="@dimen/home_card_corner_radius"
+            app:contentPadding="@dimen/home_card_content_pad">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="32dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_gift_36_0_f1c40f_none" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/my_coupons"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/viewOffer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewCouponItem"
+            android:layout_marginBottom="@dimen/home_margin_medium"
+            android:layout_marginLeft="@dimen/home_margin_medium"
+            android:layout_marginRight="@dimen/home_margin_medium"
+            app:cardBackgroundColor="@color/home_initial_background"
+            app:cardCornerRadius="@dimen/home_card_corner_radius"
+            app:contentPadding="@dimen/home_card_content_pad">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="32dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_exclamation_circle_36_0_f1c40f_none" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/special_offer"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/viewWishList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewOffer"
+            android:layout_marginBottom="@dimen/home_margin_medium"
+            android:layout_marginLeft="@dimen/home_margin_medium"
+            android:layout_marginRight="@dimen/home_margin_medium"
+            app:cardBackgroundColor="@color/home_initial_background"
+            app:cardCornerRadius="@dimen/home_card_corner_radius"
+            app:contentPadding="@dimen/home_card_content_pad">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="32dp"
+                    android:background="@null"
+                    app:srcCompat="@drawable/ic_checklist_36_0_f1c40f_none" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wish_list"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/viewProduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewWishList"
+            android:layout_marginBottom="@dimen/home_margin_medium"
+            android:layout_marginLeft="@dimen/home_margin_medium"
+            android:layout_marginRight="@dimen/home_margin_medium"
+            app:cardBackgroundColor="@color/home_initial_background"
+            app:cardCornerRadius="@dimen/home_card_corner_radius"
+            app:contentPadding="@dimen/home_card_content_pad">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="32dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_library_books_36_0_f1c40f_none" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/product_cat"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
