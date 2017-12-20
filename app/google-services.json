@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "382901966817",
+    "firebase_url": "https://supermarketbuddy-5c61d.firebaseio.com",
+    "project_id": "supermarketbuddy-5c61d",
+    "storage_bucket": "supermarketbuddy-5c61d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382901966817:android:212f230a4e2abca9",
+        "android_client_info": {
+          "package_name": "cuhk.group18.supermarketbuddy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "382901966817-bitmdivglr6pdldmhle1ohon8j2nbnaq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAnkGbymwnnn-JROe9Txf-10A_5K6GwX4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
