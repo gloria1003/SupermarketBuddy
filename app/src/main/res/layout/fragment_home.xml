@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="Supermarket"
-            app:srcCompat="@mipmap/bg_supermarket" />
+            app:srcCompat="@drawable/bg_supermarket" />
 
         <RelativeLayout
             android:layout_width="match_parent"
