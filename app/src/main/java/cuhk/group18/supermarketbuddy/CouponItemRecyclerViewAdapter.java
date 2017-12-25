@@ -7,26 +7,70 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import cuhk.group18.supermarketbuddy.dummy.DummyContent.CouponItem;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
+
+import java.util.ArrayList;
 import java.util.List;
 
+import cuhk.group18.supermarketbuddy.content.MapServiceProvider;
+import cuhk.group18.supermarketbuddy.model.Location;
+import cuhk.group18.supermarketbuddy.model.Offeritem;
+
 /**
- * {@link RecyclerView.Adapter} that can display a {@link CouponItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link Offeritem} and makes a call to the
  * specified {@link CouponItemFragment.OnCouponListItemSelected}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class CouponItemRecyclerViewAdapter extends RecyclerView.Adapter<CouponItemRecyclerViewAdapter.ViewHolder> {
 
-    private final List<CouponItem> mValues;
+
+    private final List<Offeritem> mValues;
     private final CouponItemFragment.OnCouponListItemSelected mListener;
     private final CouponItemFragment.OnCollectButtonClicked mCollectButtonClickedListener;
     public static int VIEW_TYPE_COLLECT = 0;
     public static int VIEW_TYPE_DISPLAY = 1 ;
 
-    public CouponItemRecyclerViewAdapter(List<CouponItem> items, CouponItemFragment.OnCouponListItemSelected listener,
+     private ChildEventListener mChildEventListener =
+         new ChildEventListener() {
+             @Override
+             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                 mValues.add(dataSnapshot.child("offeritem").getValue(Offeritem.class));
+                 notifyDataSetChanged();
+             }
+
+             @Override
+             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+             }
+
+             @Override
+             public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+             }
+
+             @Override
+             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+             }
+
+             @Override
+             public void onCancelled(DatabaseError databaseError) {
+
+             }
+         };
+
+
+    public CouponItemRecyclerViewAdapter(Location currentLocation, CouponItemFragment.OnCouponListItemSelected listener,
                                          CouponItemFragment.OnCollectButtonClicked collectButtonClickedListener) {
-        mValues = items;
+        mValues = new ArrayList<Offeritem>();
+
+        Query specialOffers = MapServiceProvider.getSpecialOffers(currentLocation);
+        specialOffers.addChildEventListener(mChildEventListener);
+
         mListener = listener;
         mCollectButtonClickedListener = collectButtonClickedListener;
     }
@@ -45,8 +89,8 @@ public class CouponItemRecyclerViewAdapter extends RecyclerView.Adapter<CouponIt
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        //holder.mIdView.setText(mValues.get(position).get);
+        holder.mContentView.setText(mValues.get(position).getDetails());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +124,7 @@ public class CouponItemRecyclerViewAdapter extends RecyclerView.Adapter<CouponIt
         public final TextView mIdView;
         public final TextView mContentView;
         public final ImageButton mButtonCollect;
-        public CouponItem mItem;
+        public Offeritem mItem;
 
         public ViewHolder(View view) {
             super(view);

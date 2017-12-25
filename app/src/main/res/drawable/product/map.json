@@ -1,0 +1,79 @@
+{
+  "locations": [
+    {
+      "id": 1,
+      "description": "special offer",
+      "coord": {
+        "x": 0,
+        "y": 6
+      },
+      "type": "special-offer",
+      "offeritem": {
+        "details": "Short Rib Boneless, Top AAA (Frozen)",
+        "imageUrl": "https://firebasestorage.googleapis.com/v0/b/supermarketbuddy-5c61d.appspot.com/o/product%2Fshort-rib.jpg?alt=media&token=598eceee-1822-4d75-adf4-41b623875a93",
+        "origPrice": 89.9,
+        "specialPrice": 79.9
+      }
+    },
+    {
+      "id": 2,
+      "description": "special offer",
+      "coord": {
+        "x": 3,
+        "y": 7
+      },
+      "type": "special-offer",
+      "offeritem": {
+        "details": "Kellogg's - Special K (Red Berries)",
+        "imageUrl": "https://firebasestorage.googleapis.com/v0/b/supermarketbuddy-5c61d.appspot.com/o/product%2Fspecial-k.jpg?alt=media&token=c22206b5-9718-4d75-9a1a-bcdc194c4edd",
+        "origPrice": 57.5,
+        "specialPrice": 49.9
+      }
+    },
+    {
+      "id": 3,
+      "description": "special offer",
+      "type": "special-offer",
+      "coord": {
+        "x": 5,
+        "y": 4
+      },
+      "offeritem": {
+        "details": "ITALIANA - CHARDONNAY SEMI DRY",
+        "imageUrl": "https://firebasestorage.googleapis.com/v0/b/supermarketbuddy-5c61d.appspot.com/o/product%2FCHARDONNAY.jpg?alt=media&token=8595b6c8-ebda-44c8-a0cf-dbf9133af377",
+        "origPrice": 130.9,
+        "specialPrice": 119
+      }
+    },
+    {
+      "id": 4,
+      "description": "coupon",
+      "type": "coupon-checkpoint",
+      "coord": {
+        "x": 8,
+        "y": 1
+      },
+      "coupon": {
+        "id": "coupon-1",
+        "details": "Enjoy a 5% discount for any purchase in Supermarket Buddy",
+        "expirydate": "2018-06-30T00:00:00.000Z",
+        "redempturl": "http://coupon-1"
+      }
+    },
+    {
+      "id": 5,
+      "description": "coupon",
+      "type": "coupon-checkpoint",
+      "coord": {
+        "x": 6,
+        "y": 7
+      },
+      "coupon": {
+        "id": "coupon-2",
+        "details": "Enjoy 10% discount with purchase amount $300 of CETAPHIL Health care products (includes DailyAdvance Lotion, Moisturizing Cream )",
+        "expirydate": "2018-01-31T00:00:00.000Z",
+        "redempturl": "http://coupon-2"
+      }
+    }
+  ]
+}

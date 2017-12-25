@@ -35,6 +35,10 @@ dependencies {
     compile 'com.google.firebase:firebase-auth:11.8.0'
     compile 'com.google.firebase:firebase-database:11.8.0'
     compile 'com.google.firebase:firebase-crash:11.8.0'
+
+    ////https://guides.codepath.com/android/Leveraging-the-Gson-Library
+    compile 'com.google.code.gson:gson:2.8.0'
+
 }
 // for  the google-services.json
 apply plugin: 'com.google.gms.google-services'

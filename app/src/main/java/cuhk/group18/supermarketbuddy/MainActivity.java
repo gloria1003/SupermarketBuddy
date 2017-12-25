@@ -15,7 +15,8 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 
-import cuhk.group18.supermarketbuddy.dummy.DummyContent;
+import cuhk.group18.supermarketbuddy.model.Offeritem;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener ,
@@ -130,14 +131,14 @@ public class MainActivity extends AppCompatActivity
 
     // Implement for the Coupon
     @Override
-    public void onCouponItemSelected(DummyContent.CouponItem item) {
+    public void onCouponItemSelected(Offeritem item) {
 
-        Toast toast = Toast.makeText(this, item.content, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(this, item.getDetails(), Toast.LENGTH_SHORT);
     }
 
     @Override
-    public void onCollectCoupon(DummyContent.CouponItem item) {
-        showDialog("Coupon Collected!","You have collected the coupon " + item.content);
+    public void onCollectCoupon(Offeritem item) {
+        showDialog("Coupon Collected!","You have collected the coupon " + item.getDetails());
     }
     // TODO: Show error on screen with an alert dialog
     private void showDialog(String title, String message) {

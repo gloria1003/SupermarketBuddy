@@ -10,8 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import cuhk.group18.supermarketbuddy.dummy.DummyContent;
-import cuhk.group18.supermarketbuddy.dummy.DummyContent.CouponItem;
+
+import cuhk.group18.supermarketbuddy.content.MapServiceProvider;
+import cuhk.group18.supermarketbuddy.model.Coord;
+import cuhk.group18.supermarketbuddy.model.Location;
+import cuhk.group18.supermarketbuddy.model.Offeritem;
 
 /**
  * A fragment representing a list of Items.
@@ -27,6 +30,7 @@ public class CouponItemFragment extends Fragment {
     private int mColumnCount = 1;
     private OnCouponListItemSelected mListener;
     private OnCollectButtonClicked mCollectButtonClickedListener;
+    private CurrentLocationListener locationListener;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -68,7 +72,9 @@ public class CouponItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new CouponItemRecyclerViewAdapter(DummyContent.ITEMS, mListener,mCollectButtonClickedListener));
+            Location l = new Location();
+            l.setCoord(new Coord(0,0));
+            recyclerView.setAdapter(new CouponItemRecyclerViewAdapter(l, mListener,mCollectButtonClickedListener));
         }
         return view;
     }
@@ -112,10 +118,18 @@ public class CouponItemFragment extends Fragment {
      */
     public interface OnCouponListItemSelected {
         // TODO: Update argument type and name
-        void onCouponItemSelected(CouponItem item);
+        void onCouponItemSelected(Offeritem item);
     }
 
     public interface OnCollectButtonClicked{
-        void onCollectCoupon(CouponItem item);
+        void onCollectCoupon(Offeritem item);
+    }
+
+    public class CurrentLocationListener{
+        // refresh the list
+        public void onCurrenLocationUpdated(Location lastLocation){
+            // update the list
+
+        }
     }
 }
