@@ -2,24 +2,31 @@ package cuhk.group18.supermarketbuddy;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+
+import cuhk.group18.supermarketbuddy.dummy.DummyContent;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener ,
         HomeFragment.OnFragmentInteractionListener,
-        MyCouponFragment.OnMyCouponSelectedListener
+        MyCouponFragment.OnMyCouponSelectedListener,
+        CouponItemFragment.OnCouponListItemSelected,
+        CouponItemFragment.OnCollectButtonClicked
 {
+
+    private DatabaseReference mDatabaseReference;
+//    private CouponListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +35,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -117,6 +116,8 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+
+
     @Override
     public void onMyCouponSelected(Uri uri) {
         Toast toast = Toast.makeText(this, uri.getEncodedFragment(), Toast.LENGTH_SHORT);
@@ -125,5 +126,27 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    // Implement for the Coupon
+    @Override
+    public void onCouponItemSelected(DummyContent.CouponItem item) {
+
+        Toast toast = Toast.makeText(this, item.content, Toast.LENGTH_SHORT);
+    }
+
+    @Override
+    public void onCollectCoupon(DummyContent.CouponItem item) {
+        showDialog("Coupon Collected!","You have collected the coupon " + item.content);
+    }
+    // TODO: Show error on screen with an alert dialog
+    private void showDialog(String title, String message) {
+
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 }

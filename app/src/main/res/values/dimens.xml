@@ -10,5 +10,6 @@
     <dimen name="home_card_content_pad">10dp</dimen>
     <dimen name="home_margin_small">15dp</dimen>
     <dimen name="home_card_corner_radius">15dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 
 </resources>
