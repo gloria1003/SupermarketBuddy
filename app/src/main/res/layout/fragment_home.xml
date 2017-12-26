@@ -52,7 +52,7 @@
 
         <fragment
             android:id="@+id/fragment"
-            android:name="cuhk.group18.supermarketbuddy.CouponItemFragment"
+            android:name="cuhk.group18.supermarketbuddy.OfferitemFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/title_nearby_coupon"

@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-import cuhk.group18.supermarketbuddy.content.MapServiceProvider;
 import cuhk.group18.supermarketbuddy.model.Coord;
 import cuhk.group18.supermarketbuddy.model.Location;
 import cuhk.group18.supermarketbuddy.model.Offeritem;
@@ -19,30 +18,29 @@ import cuhk.group18.supermarketbuddy.model.Offeritem;
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnCouponListItemSelected}
+ * Activities containing this fragment MUST implement the {@link OnOfferitemSelected}
  * interface.
  */
-public class CouponItemFragment extends Fragment {
+public class OfferitemFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    private OnCouponListItemSelected mListener;
-    private OnCollectButtonClicked mCollectButtonClickedListener;
+    private OnAddToWishListButtonClicked mButtonClickedListener;
     private CurrentLocationListener locationListener;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public CouponItemFragment() {
+    public OfferitemFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static CouponItemFragment newInstance(int columnCount) {
-        CouponItemFragment fragment = new CouponItemFragment();
+    public static OfferitemFragment newInstance(int columnCount) {
+        OfferitemFragment fragment = new OfferitemFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -61,7 +59,7 @@ public class CouponItemFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_couponitem_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_offeritem_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -74,7 +72,7 @@ public class CouponItemFragment extends Fragment {
             }
             Location l = new Location();
             l.setCoord(new Coord(0,0));
-            recyclerView.setAdapter(new CouponItemRecyclerViewAdapter(l, mListener,mCollectButtonClickedListener));
+            recyclerView.setAdapter(new OfferItemRecyclerViewAdapter(l, mButtonClickedListener));
         }
         return view;
     }
@@ -83,18 +81,13 @@ public class CouponItemFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnCouponListItemSelected) {
-            mListener = (OnCouponListItemSelected) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnCouponListItemSelected");
-        }
-        if (context instanceof  OnCollectButtonClicked){
-            mCollectButtonClickedListener = (OnCollectButtonClicked) context;
+
+        if (context instanceof OnAddToWishListButtonClicked){
+            mButtonClickedListener = (OnAddToWishListButtonClicked) context;
         } else
         {
             throw new RuntimeException(context.toString()
-                    + " must implement OnCollectButtonClicked");
+                    + " must implement OnAddToWishListButtonClicked");
 
         }
     }
@@ -102,27 +95,12 @@ public class CouponItemFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
-        mCollectButtonClickedListener = null;
+        mButtonClickedListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnCouponListItemSelected {
-        // TODO: Update argument type and name
-        void onCouponItemSelected(Offeritem item);
-    }
 
-    public interface OnCollectButtonClicked{
-        void onCollectCoupon(Offeritem item);
+    public interface OnAddToWishListButtonClicked {
+        void OnAddToWishListButtonClicked(Location item);
     }
 
     public class CurrentLocationListener{

@@ -92,19 +92,6 @@ public class HomeFragment extends Fragment
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-
-//        View couponRowListView = view.findViewById(R.id.couponrow_list);
-//        // Set the adapter
-//        if (couponRowListView instanceof RecyclerView) {
-//            Context context = couponRowListView.getContext();
-//            RecyclerView recyclerView = (RecyclerView) couponRowListView;
-//            if (mColumnCount <= 1) {
-//                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-//            } else {
-//                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-//            }
-//            recyclerView.setAdapter(new MyCouponRowRecyclerViewAdapter(NearbyCouponContent.ITEMS, couponRowFragmentListener));
-//        }
         return view;
     }
 

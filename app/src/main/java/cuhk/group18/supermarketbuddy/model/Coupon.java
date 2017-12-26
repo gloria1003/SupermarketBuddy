@@ -10,6 +10,7 @@ public class Coupon {
     private String details;
     private String expirydate;
     private String redempturl;
+    
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String getId() {

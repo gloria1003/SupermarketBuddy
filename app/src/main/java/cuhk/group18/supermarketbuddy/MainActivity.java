@@ -13,21 +13,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseReference;
-
+import cuhk.group18.supermarketbuddy.content.MapServiceProvider;
+import cuhk.group18.supermarketbuddy.model.Coupon;
+import cuhk.group18.supermarketbuddy.model.Location;
 import cuhk.group18.supermarketbuddy.model.Offeritem;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener ,
         HomeFragment.OnFragmentInteractionListener,
-        MyCouponFragment.OnMyCouponSelectedListener,
-        CouponItemFragment.OnCouponListItemSelected,
-        CouponItemFragment.OnCollectButtonClicked
+        MyCouponFragment.OnMyCouponItemSelected,
+        OfferitemFragment.OnAddToWishListButtonClicked
 {
 
-    private DatabaseReference mDatabaseReference;
-//    private CouponListAdapter mAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +49,8 @@ public class MainActivity extends AppCompatActivity
         // set the fragment
         HomeFragment fragment = new HomeFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.content_frame, fragment).commit();
+
+
     }
 
     @Override
@@ -120,26 +121,10 @@ public class MainActivity extends AppCompatActivity
 
 
     @Override
-    public void onMyCouponSelected(Uri uri) {
-        Toast toast = Toast.makeText(this, uri.getEncodedFragment(), Toast.LENGTH_SHORT);
-    }
-
-    @Override
     public void onFragmentInteraction(Uri uri) {
 
     }
 
-    // Implement for the Coupon
-    @Override
-    public void onCouponItemSelected(Offeritem item) {
-
-        Toast toast = Toast.makeText(this, item.getDetails(), Toast.LENGTH_SHORT);
-    }
-
-    @Override
-    public void onCollectCoupon(Offeritem item) {
-        showDialog("Coupon Collected!","You have collected the coupon " + item.getDetails());
-    }
     // TODO: Show error on screen with an alert dialog
     private void showDialog(String title, String message) {
 
@@ -149,5 +134,23 @@ public class MainActivity extends AppCompatActivity
                 .setPositiveButton(android.R.string.ok, null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+    }
+
+    @Override
+    public void onMyCouponItemSelected(Coupon item) {
+        new AlertDialog.Builder(this)
+                .setTitle(item.getExpirydate())
+                .setMessage(item.getDetails())
+                .setPositiveButton(android.R.string.ok, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+
+    }
+
+    @Override
+    public void OnAddToWishListButtonClicked(Location item) {
+        showDialog("Added to wish list!", "Notification for item " + item.getOfferitem().getDetails()+ " +  will be prompted.");
+        // TODO: Grab an instance of FirebaseAuth
+        MapServiceProvider.addToMyWishList(item);
     }
 }

@@ -6,6 +6,9 @@ import java.util.Map;
 
 public class Coord {
 
+    public Coord(){
+
+    }
     public Coord(Integer x, Integer y){
         this.x = x;
         this.y = y;

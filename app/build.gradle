@@ -39,6 +39,9 @@ dependencies {
     ////https://guides.codepath.com/android/Leveraging-the-Gson-Library
     compile 'com.google.code.gson:gson:2.8.0'
 
+    // altbeacon
+    compile 'org.altbeacon:android-beacon-library:2+'
+
 }
 // for  the google-services.json
 apply plugin: 'com.google.gms.google-services'
