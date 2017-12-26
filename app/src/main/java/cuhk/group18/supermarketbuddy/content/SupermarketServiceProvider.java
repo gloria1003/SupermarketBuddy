@@ -21,14 +21,50 @@ import cuhk.group18.supermarketbuddy.model.Offeritem;
  * <p>
  * TODO: Replace all uses of this class before publishing your app.
  */
-public class MapServiceProvider {
+public class SupermarketServiceProvider {
 
-    public static final String TAG = "MapServiceProvider";
+    public static final String TAG = "SSvcProvider";
+
+    private ArrayList<Location> avaliableCoupons = new ArrayList<Location>();
 
 
+    public SupermarketServiceProvider(){
 
-    MapServiceProvider(){
+    }
 
+    public ArrayList<Location> getAvailableCouponLocations() {
+
+        DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        //        Query query = mDatabaseReference.child("locations").child("type").equalTo("special-offer");
+        Query query = mDatabaseReference.child("locations").orderByChild("type").equalTo("coupon-checkpoint");
+        ChildEventListener childEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                avaliableCoupons.add(dataSnapshot.getValue(Location.class));
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        query.addChildEventListener(childEventListener);
+        return avaliableCoupons;
     }
 
     public static Query getSpecialOffers(Location currentLocation) {
@@ -41,15 +77,16 @@ public class MapServiceProvider {
     public static Query getMyCoupons() {
         DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        Query query = mDatabaseReference.child("user_coupons").equalTo("currentUser");
+        Query query = mDatabaseReference.child("user_coupons").child(currentUser.getUid()).child("coupons");
         return query;
     }
 
-    public static void saveCoupons(Coupon item){
+    public void saveCoupons(Coupon item){
         // get the auth user
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        mDatabaseReference.child("user_coupons").child(currentUser.getUid()).setValue(item);
+        Query query = mDatabaseReference.child("user_coupons").child(currentUser.getUid()).child("coupons").push();
+        query.getRef().setValue(item);
     }
 
     public static void addToMyWishList(Location offerItemLocation){

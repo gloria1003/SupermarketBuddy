@@ -25,5 +25,16 @@
             android:icon="@drawable/ic_library_books_24_0_ffffff_none"
             android:title="@string/product_cat" />
     </group>
+    <item android:title="Test" >
+        <menu >
+            <group >
+                <item
+                    android:id="@+id/nav_test_collect_coupon"
+                    android:title="Test Collect Coupon" />
+            </group>
+        </menu>
+
+    </item>
+
 
 </menu>

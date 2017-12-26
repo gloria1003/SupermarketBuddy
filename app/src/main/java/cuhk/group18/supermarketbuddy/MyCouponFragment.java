@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-import cuhk.group18.supermarketbuddy.content.MapServiceProvider;
+import cuhk.group18.supermarketbuddy.content.SupermarketServiceProvider;
 import cuhk.group18.supermarketbuddy.model.Coupon;
 
 /**
@@ -25,8 +25,9 @@ public class MyCouponFragment extends Fragment {
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
-    private int mColumnCount = 3;
+    private int mColumnCount = 1;
     private OnMyCouponItemSelected mListener;
+    SupermarketServiceProvider serviceProvider ;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -52,6 +53,7 @@ public class MyCouponFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+         serviceProvider = new SupermarketServiceProvider();
     }
 
     @Override
@@ -68,7 +70,7 @@ public class MyCouponFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyCouponRecyclerViewAdapter(MapServiceProvider.getMyCoupons(), mListener));
+            recyclerView.setAdapter(new MyCouponRecyclerViewAdapter(serviceProvider.getMyCoupons(), mListener));
         }
         return view;
     }

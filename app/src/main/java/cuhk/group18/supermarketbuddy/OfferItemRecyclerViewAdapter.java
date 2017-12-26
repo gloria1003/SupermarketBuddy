@@ -1,9 +1,6 @@
 package cuhk.group18.supermarketbuddy;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +14,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import cuhk.group18.supermarketbuddy.content.MapServiceProvider;
+import cuhk.group18.supermarketbuddy.content.SupermarketServiceProvider;
 import cuhk.group18.supermarketbuddy.model.Location;
 import cuhk.group18.supermarketbuddy.model.Offeritem;
 
@@ -75,7 +69,7 @@ public class OfferItemRecyclerViewAdapter extends RecyclerView.Adapter<OfferItem
                                         OfferitemFragment.OnAddToWishListButtonClicked collectButtonClickedListener) {
         mValues = new ArrayList<Location>();
 
-        Query specialOffers = MapServiceProvider.getSpecialOffers(currentLocation);
+        Query specialOffers = SupermarketServiceProvider.getSpecialOffers(currentLocation);
         specialOffers.addChildEventListener(mChildEventListener);
 
 
@@ -96,7 +90,7 @@ public class OfferItemRecyclerViewAdapter extends RecyclerView.Adapter<OfferItem
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        //holder.mIdView.setText(mValues.get(position).get);
+        //holder.mDetailView.setText(mValues.get(position).get);
         Offeritem item = holder.mItem.getOfferitem();
         holder.mContentView.setText(item.getDetails());
 

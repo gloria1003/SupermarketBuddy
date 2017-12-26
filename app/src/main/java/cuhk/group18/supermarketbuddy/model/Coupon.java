@@ -30,7 +30,14 @@ public class Coupon {
     }
 
     public String getExpirydate() {
-        return expirydate;
+
+        if (expirydate!=null && expirydate.length()>=10){
+            return expirydate.substring(0,10);
+        } else {
+
+
+            return expirydate;
+        }
     }
 
     public void setExpirydate(String expirydate) {

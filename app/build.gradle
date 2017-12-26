@@ -42,6 +42,7 @@ dependencies {
     // altbeacon
     compile 'org.altbeacon:android-beacon-library:2+'
 
+
 }
 // for  the google-services.json
 apply plugin: 'com.google.gms.google-services'

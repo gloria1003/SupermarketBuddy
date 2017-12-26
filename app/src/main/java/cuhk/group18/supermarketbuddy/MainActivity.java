@@ -11,12 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import cuhk.group18.supermarketbuddy.content.MapServiceProvider;
+import java.util.ArrayList;
+
+import cuhk.group18.supermarketbuddy.content.SupermarketServiceProvider;
 import cuhk.group18.supermarketbuddy.model.Coupon;
 import cuhk.group18.supermarketbuddy.model.Location;
-import cuhk.group18.supermarketbuddy.model.Offeritem;
 
 
 public class MainActivity extends AppCompatActivity
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity
         OfferitemFragment.OnAddToWishListButtonClicked
 {
 
-
+    private SupermarketServiceProvider serviceProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity
         // set the fragment
         HomeFragment fragment = new HomeFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.content_frame, fragment).commit();
-
+        serviceProvider = new SupermarketServiceProvider();
 
     }
 
@@ -105,6 +105,13 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_offer) {
 
+        } else if (id== R.id.nav_test_collect_coupon){
+            ArrayList<Location> availableCouponLocations = serviceProvider.getAvailableCouponLocations();
+            if (availableCouponLocations.size()>0){
+                collectCoupon(availableCouponLocations.get(0).getCoupon());
+            }
+
+
         }
         if (fragment!=null) {
             getSupportFragmentManager().beginTransaction()
@@ -147,10 +154,16 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    private void collectCoupon(Coupon coupon) {
+        showDialog("You have get the coupons", coupon.getDetails());
+        // TODO: Grab an instance of FirebaseAuth
+        serviceProvider.saveCoupons(coupon);
+    }
+
     @Override
     public void OnAddToWishListButtonClicked(Location item) {
         showDialog("Added to wish list!", "Notification for item " + item.getOfferitem().getDetails()+ " +  will be prompted.");
         // TODO: Grab an instance of FirebaseAuth
-        MapServiceProvider.addToMyWishList(item);
+        SupermarketServiceProvider.addToMyWishList(item);
     }
 }

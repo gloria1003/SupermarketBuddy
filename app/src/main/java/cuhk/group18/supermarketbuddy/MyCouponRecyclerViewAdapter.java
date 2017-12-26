@@ -10,11 +10,16 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
+import com.google.gson.Gson;
+import com.google.gson.internal.bind.DateTypeAdapter;
 
 import cuhk.group18.supermarketbuddy.MyCouponFragment.OnMyCouponItemSelected;
 import cuhk.group18.supermarketbuddy.model.Coupon;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,6 +28,10 @@ import java.util.List;
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyCouponRecyclerViewAdapter extends RecyclerView.Adapter<MyCouponRecyclerViewAdapter.ViewHolder> {
+
+
+    final SimpleDateFormat DATE_JSON_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm a z");
+    final SimpleDateFormat DATE_SIMPLE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     private List<Coupon> mValues;
     private final OnMyCouponItemSelected mListener;
@@ -70,8 +79,13 @@ public class MyCouponRecyclerViewAdapter extends RecyclerView.Adapter<MyCouponRe
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).getDetails());
-        holder.mContentView.setText(mValues.get(position).getExpirydate());
+        holder.mDetailView.setText(mValues.get(position).getDetails());
+
+        String format = mValues.get(position).getExpirydate();
+        if (format!=null){
+            format = format.substring(0,10);
+        }
+        holder.mExpiryDate.setText(format);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,20 +106,20 @@ public class MyCouponRecyclerViewAdapter extends RecyclerView.Adapter<MyCouponRe
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView mDetailView;
+        public final TextView mExpiryDate;
         public Coupon mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mDetailView = (TextView) view.findViewById(R.id.coupon_detail);
+            mExpiryDate = (TextView) view.findViewById(R.id.coupon_expiry);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + mExpiryDate.getText() + "'";
         }
     }
 }
